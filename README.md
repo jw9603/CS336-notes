@@ -1,6 +1,6 @@
 # CS336-notes
 
-Stanford **CS336: Language Modeling from Scratch** 강의를 들으며 정리한 개인 학습 노트입니다.
+Stanford **CS336: [Language Modeling from Scratch](https://cs336.stanford.edu/)** 강의를 들으며 정리한 개인 학습 노트입니다.
 
 ## About the Course
 
