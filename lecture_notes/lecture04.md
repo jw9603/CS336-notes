@@ -144,9 +144,9 @@ $$
 $$
 QK^\top =
 \begin{bmatrix}
-q_1^\top k_1 & q_1^\top k_2 & \cdots & q_1^\top k_n \\
-q_2^\top k_1 & q_2^\top k_2 & \cdots & q_2^\top k_n \\
-\vdots & \vdots & \ddots & \vdots \\
+q_1^\top k_1 & q_1^\top k_2 & \cdots & q_1^\top k_n \\\\
+q_2^\top k_1 & q_2^\top k_2 & \cdots & q_2^\top k_n \\\\
+\vdots & \vdots & \ddots & \vdots \\\\
 q_n^\top k_1 & q_n^\top k_2 & \cdots & q_n^\top k_n
 \end{bmatrix}
 $$
@@ -866,9 +866,9 @@ $K$는 모든 token의 key를 모아놓은 행렬이고, $V$는 모든 token의 
 $$
 K =
 \begin{bmatrix}
-- & k_1^\top & - \\
-- & k_2^\top & - \\
-& \vdots & \\
+- & k_1^\top & - \\\\
+- & k_2^\top & - \\\\
+& \vdots & \\\\
 - & k_n^\top & -
 \end{bmatrix}
 $$
@@ -878,9 +878,9 @@ $$
 $$
 V =
 \begin{bmatrix}
-- & v_1^\top & - \\
-- & v_2^\top & - \\
-& \vdots & \\
+- & v_1^\top & - \\\\
+- & v_2^\top & - \\\\
+& \vdots & \\\\
 - & v_n^\top & -
 \end{bmatrix}
 $$
@@ -1292,6 +1292,7 @@ $$
 이 아이디어를 반영한것이 Mamba-2 형태입니다.
 
 슬라이드에서는 Mamba-2를 다음과 같이 표현합니다.
+
 $$
 S_t = \gamma_t S_{t-1} + k_t v_t^\top
 $$
@@ -1901,7 +1902,7 @@ $$
 $$
 k =
 \begin{bmatrix}
-1 \\
+1 \\\\
 0
 \end{bmatrix}
 $$
@@ -1915,7 +1916,7 @@ $$
 $$
 kk^\top =
 \begin{bmatrix}
-1 \\
+1 \\\\
 0
 \end{bmatrix}
 \begin{bmatrix}
@@ -1923,7 +1924,7 @@ kk^\top =
 \end{bmatrix}
 =
 \begin{bmatrix}
-1 & 0 \\
+1 & 0 \\\\
 0 & 0
 \end{bmatrix}
 $$
@@ -1937,7 +1938,7 @@ $$
 $$
 x =
 \begin{bmatrix}
-3 \\
+3 \\\\
 5
 \end{bmatrix}
 $$
@@ -1951,16 +1952,16 @@ $$
 $$
 kk^\top x =
 \begin{bmatrix}
-1 & 0 \\
+1 & 0 \\\\
 0 & 0
 \end{bmatrix}
 \begin{bmatrix}
-3 \\
+3 \\\\
 5
 \end{bmatrix}
 =
 \begin{bmatrix}
-3 \\
+3 \\\\
 0
 \end{bmatrix}
 $$
@@ -2064,7 +2065,7 @@ $$
 $$
 k =
 \begin{bmatrix}
-1 \\
+1 \\\\
 0
 \end{bmatrix}
 $$
@@ -2078,7 +2079,7 @@ $$
 $$
 kk^\top =
 \begin{bmatrix}
-1 & 0 \\
+1 & 0 \\\\
 0 & 0
 \end{bmatrix}
 $$
@@ -2095,17 +2096,17 @@ $$
 $$
 I - kk^\top =
 \begin{bmatrix}
-1 & 0 \\
+1 & 0 \\\\
 0 & 1
 \end{bmatrix}
 -
 \begin{bmatrix}
-1 & 0 \\
+1 & 0 \\\\
 0 & 0
 \end{bmatrix}
 =
 \begin{bmatrix}
-0 & 0 \\
+0 & 0 \\\\
 0 & 1
 \end{bmatrix}
 $$
@@ -2119,16 +2120,16 @@ $$
 $$
 (I - kk^\top)x =
 \begin{bmatrix}
-0 & 0 \\
+0 & 0 \\\\
 0 & 1
 \end{bmatrix}
 \begin{bmatrix}
-3 \\
+3 \\\\
 5
 \end{bmatrix}
 =
 \begin{bmatrix}
-0 \\
+0 \\\\
 5
 \end{bmatrix}
 $$
@@ -2450,6 +2451,7 @@ $$
   
 
 그리고 sparse attention은 다음처럼 계산됩니다.
+
 $$
 y_t = \sum_{i \in \mathcal{I}_t} \alpha_{ti} v_i
 $$
@@ -3740,7 +3742,7 @@ $$
 $$
 g_{i,t} =
 \begin{cases}
-s_{i,t}, & s_{i,t} \in \mathrm{TopK}(\{s_{j,t} \mid 1 \le j \le N\}, K) \\
+s_{i,t}, & s_{i,t} \in \mathrm{TopK}(\{s_{j,t} \mid 1 \le j \le N\}, K) \\\\
 0, & \mathrm{otherwise}
 \end{cases}
 $$
