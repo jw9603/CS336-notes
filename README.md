@@ -12,6 +12,7 @@ Stanford **CS336: [Language Modeling from Scratch](https://cs336.stanford.edu/)*
 | Lecture | Title | Link |
 |---|---|---|
 | 01 | Overview and Tokenization | [lecture_notes/lecture01.md](lecture_notes/lecture01.md) |
+| 02 | Resource Accounting (Systems) | [lecture_notes/lecture02.md](lecture_notes/lecture02.md) |
 | 04 | Attention Alternatives and Mixture of Experts | [lecture_notes/lecture04.md](lecture_notes/lecture04.md) |
 
 > 강의를 따라가며 노트는 계속 추가/업데이트됩니다.
