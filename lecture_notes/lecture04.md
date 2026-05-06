@@ -1,5 +1,11 @@
 # Attention Alternatives And Mixtures Of Experts
 
+> 기준 자료: `lecture_04.pdf` (CS336 Lecture 4). 각 페이지를 하나의 제목으로 두고, 원문 흐름을 유지하면서 한국어로 상세 해설을 붙인 정리본입니다.
+
+> 수식은 Markdown의 LaTeX 수식 표기(`$...$`, `$$...$$`)로 정리했습니다. GitHub/Obsidian/Typora/VS Code Markdown Preview 등 LaTeX 렌더링을 지원하는 뷰어에서 수식 형태로 확인할 수 있습니다.
+
+---
+
 ## Page 1. 
 Attention Alternatives and Mixture of Expert가 이번 강의의 주제입니다.
 즉, Transformer의 핵심 병목인 attention 비용을 줄이는 방법과, 모델 파라미터 수를 크게 늘리면서도 계산량은 제한하는 MoE 구조를 다룹니다.
