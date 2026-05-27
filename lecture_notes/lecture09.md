@@ -714,7 +714,7 @@ n^{-\frac{2\beta}{2\beta+1}}
 
 ![Page 7](../images/lecture09/page_07.png)
 
-이 페이지는 1993년 논문 **“Learning Curves: Asymptotic Values and Rate of Convergence”**를 통해, scaling law의 아이디어가 LLM 이전부터 이미 **learning curve** 연구로 존재했음을 보여줍니다. 이 논문은 전체 training set을 모두 사용해보기 전에, 일부 데이터에서 관찰한 학습 곡선만으로 classifier의 최종 성능을 예측하려는 목적을 가지고 있었습니다.
+이 페이지는 1993년 논문 <strong>“Learning Curves: Asymptotic Values and Rate of Convergence”</strong>를 통해, scaling law의 아이디어가 LLM 이전부터 이미 **learning curve** 연구로 존재했음을 보여줍니다. 이 논문은 전체 training set을 모두 사용해보기 전에, 일부 데이터에서 관찰한 학습 곡선만으로 classifier의 최종 성능을 예측하려는 목적을 가지고 있었습니다.
 
 슬라이드 오른쪽에는 test error와 training error를 다음과 같은 power-law 형태로 모델링한 식이 나옵니다.
 
@@ -756,7 +756,7 @@ $l$이 커질수록 $l^{-\alpha}$가 작아지므로, $\varepsilon_{\mathrm{test
 - 이때 접근 방식은 $l^{-\alpha}$ 또는 $l^{-\beta}$ 같은 power-law decay로 근사할 수 있다.
 - 따라서 일부 작은 데이터 구간에서 관찰한 curve를 이용해 더 큰 데이터에서의 성능을 예측하려는 시도가 가능하다.
 
-LLM scaling law와 직접 연결되는 지점은 바로 **“error가 데이터 크기에 대해 power-law 형태로 감소한다”**는 생각입니다. 오늘날 LLM에서는 loss를 model size, data size, compute에 대해 fitting하지만, 그 이전부터 학습 곡선을 통해 성능 수렴을 예측하려는 연구 흐름이 있었습니다.
+LLM scaling law와 직접 연결되는 지점은 바로 <strong>“error가 데이터 크기에 대해 power-law 형태로 감소한다”</strong>는 생각입니다. 오늘날 LLM에서는 loss를 model size, data size, compute에 대해 fitting하지만, 그 이전부터 학습 곡선을 통해 성능 수렴을 예측하려는 연구 흐름이 있었습니다.
 
 ---
 
@@ -785,7 +785,7 @@ LLM scaling law와 직접 연결되는 지점은 바로 **“error가 데이터 
 - 현재 데이터 크기에서는 아직 성능이 saturation에 도달하지 않았을 수 있다.
 - 따라서 작은 데이터에서 알고리즘을 비교한 결과만으로 최종 성능을 판단하면 안 된다.
 
-슬라이드 하단의 **“Log-linear scaling with data”**는 데이터 크기의 로그에 대해 성능이 거의 선형적으로 증가하는 패턴을 의미합니다. 즉, 데이터가 10배씩 늘어날 때마다 accuracy가 일정한 폭으로 올라가는 식의 관계입니다. 물론 무한히 선형적으로 증가하는 것은 아니고, 결국 상한에 가까워지지만, 이 구간에서는 데이터 증가가 매우 강한 성능 개선 요인이었습니다.
+슬라이드 하단의 <strong>“Log-linear scaling with data”</strong>는 데이터 크기의 로그에 대해 성능이 거의 선형적으로 증가하는 패턴을 의미합니다. 즉, 데이터가 10배씩 늘어날 때마다 accuracy가 일정한 폭으로 올라가는 식의 관계입니다. 물론 무한히 선형적으로 증가하는 것은 아니고, 결국 상한에 가까워지지만, 이 구간에서는 데이터 증가가 매우 강한 성능 개선 요인이었습니다.
 
 LLM 관점에서 보면 이 페이지는 다음 문장으로 요약할 수 있습니다.
 
@@ -937,7 +937,7 @@ $\beta < 0$이면 $m$이 커질수록 $m^{\beta}$가 작아집니다. 따라서 
 
 여기서 중요한 통찰은, 계산 속도가 빨라지면 더 큰 모델이나 더 많은 데이터로 학습할 수 있고, 그 결과 처음에 잃었던 정확도를 회복하거나 오히려 더 높은 정확도를 얻을 수 있다는 것입니다.
 
-즉 이 페이지의 **“Speed = accuracy”**는 단순히 빠른 코드가 좋다는 뜻이 아닙니다. 더 정확히는 다음 뜻입니다.
+즉 이 페이지의 <strong>“Speed = accuracy”</strong>는 단순히 빠른 코드가 좋다는 뜻이 아닙니다. 더 정확히는 다음 뜻입니다.
 
 > 같은 시간과 비용 안에서 더 많은 training을 할 수 있다면, 시스템 최적화와 하드웨어 효율성은 최종 모델 성능으로 전환될 수 있다.
 
@@ -953,7 +953,7 @@ LLM 학습에서 mixed precision, FlashAttention, efficient kernels, parallelism
 
 이 페이지는 강의의 두 번째 파트로 넘어가는 구간입니다. Part 1에서는 주로 **데이터 크기와 성능 사이의 learning curve**를 역사적으로 살펴봤다면, Part 2에서는 그 관점을 실제 LLM 설계 문제로 확장합니다.
 
-슬라이드 제목은 **“Neural LLM scaling behaviors”**입니다. 여기서 scaling behavior란 단순히 “데이터를 늘리면 loss가 줄어든다”는 현상만 의미하지 않습니다. LLM에서는 성능이 여러 축의 scale에 의해 함께 결정됩니다.
+슬라이드 제목은 <strong>“Neural LLM scaling behaviors”</strong>입니다. 여기서 scaling behavior란 단순히 “데이터를 늘리면 loss가 줄어든다”는 현상만 의미하지 않습니다. LLM에서는 성능이 여러 축의 scale에 의해 함께 결정됩니다.
 
 이 파트에서 다루는 핵심 축은 다음 세 가지입니다.
 
@@ -1682,7 +1682,7 @@ D' = U_D + U_D R_D^*\left(1 - e^{-R_D/R_D^*}\right)
 
 가운데 그래프는 **Increasing parameter count**입니다. parameter count를 150M, 300M, 600M, 1.4B로 늘릴 때 loss가 약간 낮아지지만 변화가 크지 않습니다. 이는 해당 setting에서는 단순히 parameter를 키우는 것보다 반복/데이터/regularization 조건이 더 중요할 수 있음을 시사합니다.
 
-오른쪽 그래프는 **Varying seed token count $D$**입니다. seed token count가 커질수록 loss가 낮아지며, 세 가지 recipe가 비교됩니다.
+오른쪽 그래프는 <strong>Varying seed token count $D$</strong>입니다. seed token count가 커질수록 loss가 낮아지며, 세 가지 recipe가 비교됩니다.
 
 - Standard recipe
 - Regularized asymptotes
