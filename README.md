@@ -15,6 +15,7 @@ Stanford **CS336: [Language Modeling from Scratch](https://cs336.stanford.edu/)*
 | 02 | Resource Accounting (Systems) | [lecture_notes/lecture02.md](lecture_notes/lecture02.md) |
 | 03 | LM Architecture and Hyperparameters | [lecture_notes/lecture03.md](lecture_notes/lecture03.md) |
 | 04 | Attention Alternatives and Mixture of Experts | [lecture_notes/lecture04.md](lecture_notes/lecture04.md) |
+| 05 | GPUs, CUDA, Performance, FlashAttention | [lecture_notes/lecture05.md](lecture_notes/lecture05.md) |
 | 09 | Scaling Laws — Basics | [lecture_notes/lecture09.md](lecture_notes/lecture09.md) |
 
 > 강의를 따라가며 노트는 계속 추가/업데이트됩니다.
