@@ -2195,19 +2195,29 @@ $$
 \text{Total memory accesses}\approx bn^2d+nd^2
 $$
 
-슬라이드 위에는 첫 번째 항에 $K,V$, 두 번째 항에 projection이라고 표시되어 있다. 즉 두 항의 의미는 다음과 같다.
+슬라이드 위에는 첫 번째 항에 $K,V$, 두 번째 항에 projection이라고 표시되어 있다. 이 식은 decode를 $n$ step 반복하면서 발생하는 메모리 접근을 모두 누적한 결과이며, 두 항은 서로 다른 데이터를 읽는 비용이다.
 
 $$
 bn^2d
 $$
 
-이 항은 decoding 중 KV cache를 반복적으로 읽는 비용을 나타낸다. decode step이 진행될수록 현재 token은 이전 token 전체의 key/value를 attend해야 한다. 첫 step에서는 짧은 cache를 읽지만, 뒤로 갈수록 긴 cache를 읽는다. 전체 $n$ step에 대해 누적하면 대략 $n^2$ 구조가 생긴다.
+이 항은 decoding 중 KV cache를 반복적으로 읽는 비용이다. decode step $t$에서 현재 query는 이전 $t$개 token의 key/value를 모두 읽어야 하므로, 이 시점의 cache는 $K,V\in\mathbb{R}^{b\times t\times d}$이고 읽는 양은 $O(btd)$다. 첫 step에서는 짧은 cache를 읽지만 뒤로 갈수록 긴 cache를 읽게 되고, 전체 $n$ step에 대해 누적하면 등차수열 합이 나온다.
+
+$$
+\sum_{t=1}^{n}btd=bd\cdot\frac{n(n+1)}{2}\approx\frac{1}{2}bn^2d
+$$
+
+상수를 무시하면 $O(bn^2d)$다. 직관적으로 token 4개를 생성하면 step마다 KV를 $1,2,3,4$개씩 읽어 총 $10$개를 읽는 셈이고, 일반화하면 $1+2+\cdots+n=n(n+1)/2\approx O(n^2)$에서 $n^2$이 생기는 것이다. $K$와 $V$를 둘 다 읽으면 실제로는 step당 약 $2btd$지만, 복잡도 표기에서는 상수 2도 생략한다.
 
 $$
 nd^2
 $$
 
-이 항은 projection weight를 읽는 비용이다. 각 token step마다 Q/K/V projection과 output projection에 필요한 weight를 읽고 연산해야 하므로, 전체적으로 $n$번 반복된다.
+이 항은 projection weight를 읽는 비용이다. projection은 $xW$ 형태의 행렬곱이고 weight $W\in\mathbb{R}^{d\times d}$의 크기가 $d^2$이므로, decode step마다 이 weight를 HBM에서 읽으면 step당 $O(d^2)$, 전체 $n$ step 누적으로 $nd^2$가 된다.
+
+여기서 주의할 점은 projection 항에 $b$가 없다는 것이다. batch가 $b$개라도 모든 batch element가 같은 weight $W$를 공유하므로, GPU는 이상적으로 $W$를 한 번 읽은 뒤 batch의 여러 입력에 재사용한다. 따라서 step당 계산량은 $bd^2$이지만 weight memory traffic은 $bd^2$가 아니라 $d^2$이다. decode에서 batch를 키우면 arithmetic intensity가 올라가는 이유가 바로 이것인데, weight 읽기 한 번을 $b$개 token의 계산에 재사용하기 때문이다.
+
+한편 projection의 입력·출력 activation도 읽고 써야 하며 이 비용은 step당 $O(bd)$, 전체로는 $O(bnd)$다. 그러나 $n$과 $d$가 충분히 크면 $bnd$는 위 두 항보다 작으므로, 슬라이드의 식은 지배적인 두 항만 남긴 표현이다.
 
 이제 arithmetic intensity는 다음처럼 계산된다.
 
@@ -2238,6 +2248,8 @@ $$
 - batch size $b$가 크다.
 
 슬라이드도 “large batches + short seq length $(n)$ or big model dimensions $(d)$”가 필요하다고 적는다. 하지만 실제 serving에서는 이 조건을 마음대로 만족시키기 어렵다. 긴 context를 지원하려면 $n$은 커질 수밖에 없고, latency 요구사항 때문에 batch size $b$도 무한정 키울 수 없다. model dimension $d$는 모델이 정해지면 바꾸기 어렵다.
+
+두 항 중 어느 쪽이 병목인지도 이 식에서 바로 읽을 수 있다. $bn^2d$와 $nd^2$를 공통 인수 $nd$로 나누면 $bn$과 $d$의 비교가 되어, $bn<d$이면 projection weight 읽기가, $bn>d$이면 KV cache 읽기가 지배적이고 경계는 $bn\approx d$다. 예를 들어 $d=4096$, $b=1$이면 sequence length가 4096보다 짧은 동안은 weight traffic이 더 크지만, context가 그보다 길어지면 KV cache traffic이 점점 병목이 된다.
 
 그래서 마지막 문장이 중요하다.
 
