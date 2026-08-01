@@ -2219,6 +2219,8 @@ $$
 
 한편 projection의 입력·출력 activation도 읽고 써야 하며 이 비용은 step당 $O(bd)$, 전체로는 $O(bnd)$다. 그러나 $n$과 $d$가 충분히 크면 $bnd$는 위 두 항보다 작으므로, 슬라이드의 식은 지배적인 두 항만 남긴 표현이다.
 
+**어떤 항이 더 큰가.** 두 항의 크기를 비교하면 $bn^2d$ vs $nd^2$이고, 공통항 $nd$로 나누면 $bn$ vs $d$가 된다. 따라서 $bn<d$이면 projection weight 읽기가 지배하고, $bn>d$이면 KV cache 읽기가 지배한다. 경계는 $bn\approx d$다. 예를 들어 $d=4096$, $b=1$이면 sequence length가 약 4096보다 짧을 때는 projection weight traffic이 크고, 그보다 길어질수록 KV cache traffic이 점점 중요해진다. 정리하면 $bn^2d$는 길어지는 KV cache를 매 step 반복해서 읽는 비용, $nd^2$는 크기 $d^2$인 projection weight를 $n$번 읽는 비용이다.
+
 이제 arithmetic intensity는 다음처럼 계산된다.
 
 $$
